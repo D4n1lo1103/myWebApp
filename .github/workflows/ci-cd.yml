@@ -66,4 +66,4 @@ jobs:
             npm install
             npm run build
             # Riavvia il servizio (sostituisci "my-app" con il tuo nome di servizio)
-            sudo systemctl restart my-app
+            sudo systemctl restart web-app
