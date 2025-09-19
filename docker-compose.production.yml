@@ -1,15 +1,21 @@
 version: '3.9'
 
 services:
-  app:
+  app_prod:
+  backend:
+    container_name: nestjs-app-prod
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-be
       target: prod
-    container_name: nestjs-app-prod
-
-#DB...
-
     ports:
       - "3001:3000"
-    command: node dist/main.js
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile-fe
+      target: production
+    ports:
+      - "80:80"
+#DB...

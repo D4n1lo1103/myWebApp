@@ -1,15 +1,26 @@
 version: '3.9'
 
 services:
-  app:
+  app_dev:
+  backend:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-be
       target: dev
     container_name: nestjs-app-dev  
+    image: nestjs-app-dev
     ports:
       - "3000:3000"
     volumes:
-      - .:/web-app
+      - ./src:/web-app/src
       - /web-app/node_modules
-    command: npm run start:dev
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile-fe
+      target: development
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontend:/app/frontend
