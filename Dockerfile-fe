@@ -1,0 +1,26 @@
+
+#Stage di sviluppo
+#hot reload e accesso immediato al codice sorgente
+FROM node:20-alpine3.18 AS dev
+WORKDIR /web-app
+COPY frontend/package*.json ./
+RUN npm install -g @nestjs/cli && npm install 
+COPY frontend/ ./
+RUN npm install
+EXPOSE 4200
+CMD ["npm", "start"]
+
+#Stage di produzione
+#container ottimizzato, leggero, solo con il codice compilato, pronto per l’ambiente di produzione
+FROM node:20-alpine
+WORKDIR /web-app
+COPY frontend/package*.json ./
+RUN npm install
+COPY frontend/ ./
+# Build di Angular
+RUN npm run build --prod
+# Installa un server leggero per servire i file statici
+RUN npm install -g serve
+EXPOSE 80
+# Serve i file buildati
+CMD ["serve", "-s", "dist/frontend", "-l", "80"]
