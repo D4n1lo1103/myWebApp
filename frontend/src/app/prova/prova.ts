@@ -2,9 +2,10 @@ import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit,
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 
+
 @Component({
   selector: 'app-prova',
-  imports: [MatCardModule, MatButtonModule],
+  imports: [MatCardModule, MatButtonModule,],
   templateUrl: './prova.html',
   styleUrl: './prova.css'
 })
